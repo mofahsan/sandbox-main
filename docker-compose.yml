@@ -1,0 +1,24 @@
+services:
+  nginx:
+    container_name: nginx_buyer
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/nginx/ssl/
+    #   - ./static:/usr/share/nginx/html/
+
+
+  sandbox-ui:
+    container_name: sandbox-ui
+    build: ./sandbox_ui
+    ports:
+      - 3000:3000
+
+  sandbox-backend:
+    container_name: sandbox-backend
+    build: ./sandbox
+    ports:
+      - 4000:4000
